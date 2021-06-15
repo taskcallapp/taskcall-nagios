@@ -11,7 +11,7 @@ INTEGRATION_KEY = ''
 TOTAL_TIME = 60
 config_parameters = {
     'integration_key': INTEGRATION_KEY,
-    'log_path': '/var/log/taskcall/send_to_taskcall.log',
+    'log_path': '/var/log/taskcall-nagios/send_to_taskcall.log',
     'nagios_server': NAGIOS_SERVER,
     'nagios_to_taskcall.logger': 'warning',
     'taskcall.api.url': 'https://integrations.taskcallapp.com/nagios',
@@ -22,9 +22,8 @@ config_parameters = {
     'nagios_to_taskcall.http.proxy.username': '',
     'nagios_to_taskcall.http.proxy.password': ''
 }
-config_path = '/home/taskcall/nagios_to_taskcall.conf'
+config_path = '/home/taskcall-nagios/nagios_to_taskcall.conf'
 cmd_line_arguments = dict()
-# config_path_2 = '/home/opsgenie/oec/conf/config.json'
 
 
 def override_config_parameters():

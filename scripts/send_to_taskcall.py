@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # This file contains the code to send alerts from Nagios to TaskCall.
 
 import argparse
@@ -14,7 +15,7 @@ config_parameters = {
     'log_path': '/var/log/taskcall-nagios/send_to_taskcall.log',
     'nagios_server': NAGIOS_SERVER,
     'nagios_to_taskcall.logger': 'warning',
-    'taskcall.api.url': 'https://integrations.taskcallapp.com/nagios',
+    'taskcall.api.url': 'https://integrations.taskcallapp.com/nagios/',
     'nagios_to_taskcall.http.proxy.enabled': 'false',
     'nagios_to_taskcall.http.proxy.port': '1111',
     'nagios_to_taskcall.http.proxy.host': 'localhost',
@@ -97,80 +98,80 @@ def send_post_request():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='send events from Nagios to TaskCall')
 
-    parser.add_argument('integKey', help='Integration key issued by TaskCall')
-    parser.add_argument('nagiosServer', default=config_parameters['nagios_server'], help='Nagios server')
-    parser.add_argument('logPath', default=config_parameters['log_path'], help='LOGPATH')
-    parser.add_argument('entityType')
-    parser.add_argument('ntt', help='NOTIFICATIONTYPE')
-    parser.add_argument('ldt', help='LONGDATETIME')
+    parser.add_argument('-integKey', help='Integration key issued by TaskCall')
+    parser.add_argument('-nagiosServer', default=config_parameters['nagios_server'], help='Nagios server')
+    parser.add_argument('-logPath', default=config_parameters['log_path'], help='LOGPATH')
+    parser.add_argument('-entityType')
+    parser.add_argument('-ntt', help='NOTIFICATIONTYPE')
+    parser.add_argument('-ldt', help='LONGDATETIME')
 
     # host related arguments
-    parser.add_argument('hn', help='HOSTNAME')
-    parser.add_argument('hdn', help='HOSTDISPLAYNAME')
-    parser.add_argument('hal', help='HOSTALIAS')
-    parser.add_argument('haddr', help='HOSTADDRESS')
-    parser.add_argument('hs', help='HOSTSTATE')
-    parser.add_argument('hsi', help='HOSTSTATEID')
-    parser.add_argument('lhs', help='LASTHOSTSTATE')
-    parser.add_argument('lhsi', help='LASTHOSTSTATEID')
-    parser.add_argument('hst', help='HOSTSTATETYPE')
-    parser.add_argument('ha', help='HOSTATTEMPT')
-    parser.add_argument('mha', help='MAXHOSTATTEMPTS')
-    parser.add_argument('hei', help='HOSTEVENTID')
-    parser.add_argument('lhei', help='LASTHOSTEVENTID')
-    parser.add_argument('hpi', help='HOSTPROBLEMID')
-    parser.add_argument('lhpi', help='LASTHOSTPROBLEMID')
-    parser.add_argument('hl', help='HOSTLATENCY')
-    parser.add_argument('het', help='HOSTEXECUTIONTIME')
-    parser.add_argument('hd', help='HOSTDURATION')
-    parser.add_argument('hds', help='HOSTDURATIONSEC')
-    parser.add_argument('hdt', help='HOSTDOWNTIME')
-    parser.add_argument('hpc', help='HOSTPERCENTCHANGE')
-    parser.add_argument('hgn', help='HOSTGROUPNAME')
-    parser.add_argument('hgns', help='HOSTGROUPNAMES')
-    parser.add_argument('lhc', help='LASTHOSTCHECK')
-    parser.add_argument('lhsc', help='LASTHOSTSTATECHANGE')
-    parser.add_argument('lhu', help='LASTHOSTUP')
-    parser.add_argument('lhd', help='LASTHOSTDOWN')
-    parser.add_argument('lhur', help='LASTHOSTUNREACHABLE')
-    parser.add_argument('ho', help='HOSTOUTPUT')
-    parser.add_argument('lho', help='LONGHOSTOUTPUT')
-    parser.add_argument('hnu', help='HOSTNOTESURL')
-    parser.add_argument('hpd', help='HOSTPERFDATA')
+    parser.add_argument('-hn', help='HOSTNAME')
+    parser.add_argument('-hdn', help='HOSTDISPLAYNAME')
+    parser.add_argument('-hal', help='HOSTALIAS')
+    parser.add_argument('-haddr', help='HOSTADDRESS')
+    parser.add_argument('-hs', help='HOSTSTATE', default=None)
+    parser.add_argument('-hsi', help='HOSTSTATEID', default=None)
+    parser.add_argument('-lhs', help='LASTHOSTSTATE', default=None)
+    parser.add_argument('-lhsi', help='LASTHOSTSTATEID', default=None)
+    parser.add_argument('-hst', help='HOSTSTATETYPE', default=None)
+    parser.add_argument('-ha', help='HOSTATTEMPT', default=None)
+    parser.add_argument('-mha', help='MAXHOSTATTEMPTS', default=None)
+    parser.add_argument('-hei', help='HOSTEVENTID', default=None)
+    parser.add_argument('-lhei', help='LASTHOSTEVENTID', default=None)
+    parser.add_argument('-hpi', help='HOSTPROBLEMID', default=None)
+    parser.add_argument('-lhpi', help='LASTHOSTPROBLEMID', default=None)
+    parser.add_argument('-hl', help='HOSTLATENCY', default=None)
+    parser.add_argument('-het', help='HOSTEXECUTIONTIME', default=None)
+    parser.add_argument('-hd', help='HOSTDURATION', default=None)
+    parser.add_argument('-hds', help='HOSTDURATIONSEC', default=None)
+    parser.add_argument('-hdt', help='HOSTDOWNTIME', default=None)
+    parser.add_argument('-hpc', help='HOSTPERCENTCHANGE', default=None)
+    parser.add_argument('-hgn', help='HOSTGROUPNAME', default=None)
+    parser.add_argument('-hgns', help='HOSTGROUPNAMES', default=None)
+    parser.add_argument('-lhc', help='LASTHOSTCHECK', default=None)
+    parser.add_argument('-lhsc', help='LASTHOSTSTATECHANGE', default=None)
+    parser.add_argument('-lhu', help='LASTHOSTUP', default=None)
+    parser.add_argument('-lhd', help='LASTHOSTDOWN', default=None)
+    parser.add_argument('-lhur', help='LASTHOSTUNREACHABLE', default=None)
+    parser.add_argument('-ho', help='HOSTOUTPUT', default=None)
+    parser.add_argument('-lho', help='LONGHOSTOUTPUT', default=None)
+    parser.add_argument('-hnu', help='HOSTNOTESURL', default=None)
+    parser.add_argument('-hpd', help='HOSTPERFDATA', default=None)
 
     # service related arguments
-    parser.add_argument('s', help='SERVICEDESC')
-    parser.add_argument('sdn', help='SERVICEDISPLAYNAME')
-    parser.add_argument('ss', help='SERVICESTATE')
-    parser.add_argument('ssi', help='SERVICESTATEID')
-    parser.add_argument('lss', help='LASTSERVICESTATE')
-    parser.add_argument('lssi', help='LASTSERVICESTATEID')
-    parser.add_argument('sst', help='SERVICESTATETYPE')
-    parser.add_argument('sa', help='SERVICEATTEMPT')
-    parser.add_argument('msa', help='MAXSERVICEATTEMPTS')
-    parser.add_argument('siv', help='SERVICEISVOLATILE')
-    parser.add_argument('sei', help='SERVICEEVENTID')
-    parser.add_argument('lsei', help='LASTSERVICEEVENTID')
-    parser.add_argument('spi', help='SERVICEPROBLEMID')
-    parser.add_argument('lspi', help='LASTSERVICEPROBLEMID')
-    parser.add_argument('sl', help='SERVICELATENCY')
-    parser.add_argument('set', help='SERVICEEXECUTIONTIME')
-    parser.add_argument('sd', help='SERVICEDURATION')
-    parser.add_argument('sds', help='SERVICEDURATIONSEC')
-    parser.add_argument('sdt', help='SERVICEDOWNTIME')
-    parser.add_argument('spc', help='SERVICEPERCENTCHANGE')
-    parser.add_argument('sgn', help='SERVICEGROUPNAME')
-    parser.add_argument('sgns', help='SERVICEGROUPNAMES')
-    parser.add_argument('lsch', help='LASTSERVICECHECK')
-    parser.add_argument('lssc', help='LASTSERVICESTATECHANGE')
-    parser.add_argument('lsok', help='LASTSERVICEOK')
-    parser.add_argument('lsw', help='LASTSERVICEWARNING')
-    parser.add_argument('lsu', help='LASTSERVICEUNKNOWN')
-    parser.add_argument('lsc', help='LASTSERVICECRITICAL')
-    parser.add_argument('so', help='SERVICEOUTPUT')
-    parser.add_argument('lso', help='LONGSERVICEOUTPUT')
-    parser.add_argument('snu', help='SERVICENOTESURL')
-    parser.add_argument('spd', help='SERVICEPERFDATA')
+    parser.add_argument('-s', help='SERVICEDESC', default=None)
+    parser.add_argument('-sdn', help='SERVICEDISPLAYNAME', default=None)
+    parser.add_argument('-ss', help='SERVICESTATE', default=None)
+    parser.add_argument('-ssi', help='SERVICESTATEID', default=None)
+    parser.add_argument('-lss', help='LASTSERVICESTATE', default=None)
+    parser.add_argument('-lssi', help='LASTSERVICESTATEID', default=None)
+    parser.add_argument('-sst', help='SERVICESTATETYPE', default=None)
+    parser.add_argument('-sa', help='SERVICEATTEMPT', default=None)
+    parser.add_argument('-msa', help='MAXSERVICEATTEMPTS', default=None)
+    parser.add_argument('-siv', help='SERVICEISVOLATILE', default=None)
+    parser.add_argument('-sei', help='SERVICEEVENTID', default=None)
+    parser.add_argument('-lsei', help='LASTSERVICEEVENTID', default=None)
+    parser.add_argument('-spi', help='SERVICEPROBLEMID', default=None)
+    parser.add_argument('-lspi', help='LASTSERVICEPROBLEMID', default=None)
+    parser.add_argument('-sl', help='SERVICELATENCY', default=None)
+    parser.add_argument('-set', help='SERVICEEXECUTIONTIME', default=None)
+    parser.add_argument('-sd', help='SERVICEDURATION', default=None)
+    parser.add_argument('-sds', help='SERVICEDURATIONSEC', default=None)
+    parser.add_argument('-sdt', help='SERVICEDOWNTIME', default=None)
+    parser.add_argument('-spc', help='SERVICEPERCENTCHANGE', default=None)
+    parser.add_argument('-sgn', help='SERVICEGROUPNAME', default=None)
+    parser.add_argument('-sgns', help='SERVICEGROUPNAMES', default=None)
+    parser.add_argument('-lsch', help='LASTSERVICECHECK', default=None)
+    parser.add_argument('-lssc', help='LASTSERVICESTATECHANGE', default=None)
+    parser.add_argument('-lsok', help='LASTSERVICEOK', default=None)
+    parser.add_argument('-lsw', help='LASTSERVICEWARNING', default=None)
+    parser.add_argument('-lsu', help='LASTSERVICEUNKNOWN', default=None)
+    parser.add_argument('-lsc', help='LASTSERVICECRITICAL', default=None)
+    parser.add_argument('-so', help='SERVICEOUTPUT', default=None)
+    parser.add_argument('-lso', help='LONGSERVICEOUTPUT', default=None)
+    parser.add_argument('-snu', help='SERVICENOTESURL', default=None)
+    parser.add_argument('-spd', help='SERVICEPERFDATA', default=None)
 
     # parse the arguments
     args = parser.parse_args()
@@ -179,78 +180,77 @@ if __name__ == '__main__':
     cmd_line_arguments['nagios_server'] = args.nagiosServer
     cmd_line_arguments['log_path'] = args.logPath
     cmd_line_arguments['entity_type'] = args.entityType
-    cmd_line_arguments['notification_type'] = args.notificationType
-    cmd_line_arguments['long_date_time'] = args.longDateTime
+    cmd_line_arguments['notification_type'] = args.ntt
+    cmd_line_arguments['long_date_time'] = args.ldt
 
-    cmd_line_arguments['host_name'] = args.hostName
-    cmd_line_arguments['host_display_name'] = args.hostDisplayName
-    cmd_line_arguments['host_alias'] = args.hostAlias
-    cmd_line_arguments['host_address'] = args.hostAddress
-    cmd_line_arguments['host_state'] = args.hostState
-    cmd_line_arguments['host_state_id'] = args.hostStateId
-    cmd_line_arguments['last_host_state'] = args.lastHostState
-    cmd_line_arguments['last_host_state_id'] = args.lastHostStateId
-    cmd_line_arguments['host_state_type'] = args.hostStateType
-    cmd_line_arguments['host_attempt'] = args.hostAttempt
-    cmd_line_arguments['max_host_attempts'] = args.maxHostAttempts
-    cmd_line_arguments['host_event_id'] = args.hostEventId
-    cmd_line_arguments['last_host_event_id'] = args.lastHostEventId
-    cmd_line_arguments['host_problem_id'] = args.hostProblemId
-    cmd_line_arguments['last_host_problem_id'] = args.lastHostProblemId
-    cmd_line_arguments['host_latency'] = args.hostLatency
-    cmd_line_arguments['host_execution_time'] = args.hostExecutionTime
-    cmd_line_arguments['host_duration'] = args.hostDuration
-    cmd_line_arguments['host_duration_sec'] = args.hostDurationSec
-    cmd_line_arguments['host_down_time'] = args.hostDownTime
-    cmd_line_arguments['host_percent_change'] = args.hostPercentChange
-    cmd_line_arguments['host_group_name'] = args.hostGroupName
-    cmd_line_arguments['host_group_names'] = args.hostGroupNames
-    cmd_line_arguments['last_host_check'] = args.lastHostCheck
-    cmd_line_arguments['last_host_state_change'] = args.lastHostStateChange
-    cmd_line_arguments['last_host_up'] = args.lastHostUp
-    cmd_line_arguments['last_host_down'] = args.lastHostDown
-    cmd_line_arguments['last_host_unreachable'] = args.lastHostUnreachable
-    cmd_line_arguments['host_output'] = args.hostOutput
-    cmd_line_arguments['long_host_output'] = args.longHostOutput
-    cmd_line_arguments['host_notes_url'] = args.hostNotesUrl
-    cmd_line_arguments['host_perf_data'] = args.hostPerfData
+    cmd_line_arguments['host_name'] = args.hn
+    cmd_line_arguments['host_display_name'] = args.hdn
+    cmd_line_arguments['host_alias'] = args.hal
+    cmd_line_arguments['host_address'] = args.haddr
+    cmd_line_arguments['host_state'] = args.hs
+    cmd_line_arguments['host_state_id'] = args.hsi
+    cmd_line_arguments['last_host_state'] = args.lhs
+    cmd_line_arguments['last_host_state_id'] = args.lhsi
+    cmd_line_arguments['host_state_type'] = args.hst
+    cmd_line_arguments['host_attempt'] = args.ha
+    cmd_line_arguments['max_host_attempts'] = args.mha
+    cmd_line_arguments['host_event_id'] = args.hei
+    cmd_line_arguments['last_host_event_id'] = args.lhei
+    cmd_line_arguments['host_problem_id'] = args.hpi
+    cmd_line_arguments['last_host_problem_id'] = args.lhpi
+    cmd_line_arguments['host_latency'] = args.hl
+    cmd_line_arguments['host_execution_time'] = args.het
+    cmd_line_arguments['host_duration'] = args.hd
+    cmd_line_arguments['host_duration_sec'] = args.hds
+    cmd_line_arguments['host_down_time'] = args.hdt
+    cmd_line_arguments['host_percent_change'] = args.hpc
+    cmd_line_arguments['host_group_name'] = args.hgn
+    cmd_line_arguments['host_group_names'] = args.hgns
+    cmd_line_arguments['last_host_check'] = args.lhc
+    cmd_line_arguments['last_host_state_change'] = args.lhsc
+    cmd_line_arguments['last_host_up'] = args.lhu
+    cmd_line_arguments['last_host_down'] = args.lhd
+    cmd_line_arguments['last_host_unreachable'] = args.lhur
+    cmd_line_arguments['host_output'] = args.ho
+    cmd_line_arguments['long_host_output'] = args.lho
+    cmd_line_arguments['host_notes_url'] = args.hnu
+    cmd_line_arguments['host_perf_data'] = args.hpd
 
-    cmd_line_arguments['service_desc'] = args.serviceDesc
-    cmd_line_arguments['service_display_name'] = args.serviceDisplayName
-    cmd_line_arguments['service_state'] = args.serviceState
-    cmd_line_arguments['service_state_id'] = args.serviceStateId
-    cmd_line_arguments['last_service_state'] = args.lastServiceState
-    cmd_line_arguments['last_service_state_id'] = args.lastServiceStateId
-    cmd_line_arguments['service_state_type'] = args.serviceStateType
-    cmd_line_arguments['service_attempt'] = args.serviceAttempt
-    cmd_line_arguments['max_service_attempts'] = args.maxServiceAttempts
-    cmd_line_arguments['service_is_volatile'] = args.serviceIsVolatile
-    cmd_line_arguments['service_event_id'] = args.serviceEventId
-    cmd_line_arguments['last_service_event_id'] = args.lastServiceEventId
-    cmd_line_arguments['service_problem_id'] = args.serviceProblemId
-    cmd_line_arguments['last_service_problem_id'] = args.lastServiceProblemId
-    cmd_line_arguments['service_latency'] = args.serviceLatency
-    cmd_line_arguments['service_execution_time'] = args.serviceExecutionTime
-    cmd_line_arguments['service_duration'] = args.serviceDuration
-    cmd_line_arguments['service_duration_sec'] = args.serviceDurationSec
-    cmd_line_arguments['service_down_time'] = args.serviceDownTime
-    cmd_line_arguments['service_percent_change'] = args.servicePercentChange
-    cmd_line_arguments['service_group_name'] = args.serviceGroupName
-    cmd_line_arguments['service_group_names'] = args.serviceGroupNames
-    cmd_line_arguments['last_service_check'] = args.lastServiceCheck
-    cmd_line_arguments['last_service_state_change'] = args.lastServiceStateChange
-    cmd_line_arguments['last_service_ok'] = args.lastServiceOk
-    cmd_line_arguments['last_service_warning'] = args.lastServiceWarning
-    cmd_line_arguments['last_service_unknown'] = args.lastServiceUnknown
-    cmd_line_arguments['last_service_critical'] = args.lastServiceCritical
-    cmd_line_arguments['service_output'] = args.serviceOutput
-    cmd_line_arguments['long_service_output'] = args.longServiceOutput
-    cmd_line_arguments['service_notes_url'] = args.serviceNotesUrl
-    cmd_line_arguments['service_perf_data'] = args.servicePerfData
+    cmd_line_arguments['service_desc'] = args.s
+    cmd_line_arguments['service_display_name'] = args.sdn
+    cmd_line_arguments['service_state'] = args.ss
+    cmd_line_arguments['service_state_id'] = args.ssi
+    cmd_line_arguments['last_service_state'] = args.lss
+    cmd_line_arguments['last_service_state_id'] = args.lssi
+    cmd_line_arguments['service_state_type'] = args.sst
+    cmd_line_arguments['service_attempt'] = args.sa
+    cmd_line_arguments['max_service_attempts'] = args.msa
+    cmd_line_arguments['service_is_volatile'] = args.siv
+    cmd_line_arguments['service_event_id'] = args.sei
+    cmd_line_arguments['last_service_event_id'] = args.lsei
+    cmd_line_arguments['service_problem_id'] = args.spi
+    cmd_line_arguments['last_service_problem_id'] = args.lspi
+    cmd_line_arguments['service_latency'] = args.sl
+    cmd_line_arguments['service_execution_time'] = args.set
+    cmd_line_arguments['service_duration'] = args.sd
+    cmd_line_arguments['service_duration_sec'] = args.sds
+    cmd_line_arguments['service_down_time'] = args.sdt
+    cmd_line_arguments['service_percent_change'] = args.spc
+    cmd_line_arguments['service_group_name'] = args.sgn
+    cmd_line_arguments['service_group_names'] = args.sgns
+    cmd_line_arguments['last_service_check'] = args.lsch
+    cmd_line_arguments['last_service_state_change'] = args.lssc
+    cmd_line_arguments['last_service_ok'] = args.lsok
+    cmd_line_arguments['last_service_warning'] = args.lsw
+    cmd_line_arguments['last_service_unknown'] = args.lsu
+    cmd_line_arguments['last_service_critical'] = args.lsc
+    cmd_line_arguments['service_output'] = args.so
+    cmd_line_arguments['long_service_output'] = args.lso
+    cmd_line_arguments['service_notes_url'] = args.snu
+    cmd_line_arguments['service_perf_data'] = args.spd
 
     # Set up logging
-    logging.basicConfig(filename=cmd_line_arguments['log_path'], level=logging.INFO,
-                        format='%(asctime)s : %(levelname)s : %(message)s')
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s : %(levelname)s : %(message)s')
 
     # Override the configuration parameters
     override_config_parameters()
